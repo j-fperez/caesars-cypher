@@ -25,4 +25,9 @@ print "Introduzca el mensaje cifrado: "
 encrypted_sentence = gets.chomp.upcase
 print "Introduce el desplazamiento: "
 shift = gets.chomp.to_i
+if shift == -3
+else
+	puts "se cambia el desplazamiento introducido al desplazamiento por defecto"
+	shift = -3
+end
 cesar_cifra(encrypted_sentence, shift)
