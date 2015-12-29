@@ -1,19 +1,28 @@
-def cesar_cifra(encrypted_word)
-	letter_by_letter = encrypted_word.chars
-	deciphered_message=[]
-	deciphered_word=""
-	letter_by_letter.each do |letter|
-		if letter.ord == 97
-			new_letter = "z"
+# limite izquierda: A = 65
+# limite derecha:   Z = 90
+# espacio = 32
+
+def cesar_cifra(encrypted_sentence, shift)
+	sentence = encrypted_sentence.chars
+	left_limit = 65
+	right_limit = 90
+	new_sentence=[]
+	for letter in sentence
+		if letter.ord == 32
+			new_sentence.push letter
+		elsif (letter.ord+shift) < 65
+			new_sentence.push ((letter.ord+shift)+26).chr
+		elsif (letter.ord+shift) > 90
+			new_sentence.push ((letter.ord+shift)-26).chr
 		else
-			new_letter = (letter.ord-1).chr
+			new_sentence.push (letter.ord+shift).chr
 		end
-		deciphered_message.push new_letter
 	end
-	deciphered_word = deciphered_message.join
-	print "El mensaje descifrado es: #{deciphered_word}\n"
+	print "El mensaje descifrado es: #{new_sentence.join}\n"
 end
 
 print "Introduzca el mensaje cifrado: "
-encrypted_word = gets.chomp
-cesar_cifra(encrypted_word)
+encrypted_sentence = gets.chomp.upcase
+print "Introduce el desplazamiento: "
+shift = gets.chomp.to_i
+cesar_cifra(encrypted_sentence, shift)
